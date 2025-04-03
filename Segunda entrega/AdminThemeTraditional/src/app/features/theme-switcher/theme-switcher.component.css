@@ -1,0 +1,13 @@
+.theme-container {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
