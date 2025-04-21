@@ -25,4 +25,7 @@ export class PaymentService {
   createPayment(payment: any): Observable<any> {
     return this.http.post<any>(`${this.API_URL}/payments/process`, payment);
   }
+  createReport(data: any): Observable<Blob> {
+    return this.http.post<any>(`${this.API_URL}/report/generate-report`, data, { responseType: 'blob' as 'json' });
+  }
 }

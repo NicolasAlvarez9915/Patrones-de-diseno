@@ -1,0 +1,47 @@
+<div [ngClass]="currentTheme" class="theme-container form-container"
+    [ngStyle]="{'background-color': currentTheme.backgroundColor, 'color': currentTheme.textColor}">
+    <form [formGroup]="reportForm" (ngSubmit)="generateReport()" class="report-form">
+        <!-- Título -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <!-- Opciones del reporte -->
+        <div class="checkbox-group">
+            <label class="checkbox-title">Opciones del reporte:</label>
+            <mat-checkbox formControlName="includeLogo">Incluir logo</mat-checkbox>
+            <mat-checkbox formControlName="includePaymentDetails">Incluir detalles de pago</mat-checkbox>
+            <mat-checkbox formControlName="includeUserInfo">Incluir información del usuario</mat-checkbox>
+            <mat-checkbox formControlName="includeTimestamp">Incluir fecha y hora</mat-checkbox>
+        </div>
+
+        <!-- Tema -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Tema</mat-label>
+            <mat-select formControlName="theme">
+                <mat-option *ngFor="let t of themes" [value]="t">{{ t }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Formato -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Formato</mat-label>
+            <mat-select formControlName="format">
+                <mat-option *ngFor="let f of formats" [value]="f">{{ f }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Mensaje en el pie -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mensaje en el pie</mat-label>
+            <input matInput formControlName="footerMessage" />
+        </mat-form-field>
+
+        <!-- Botones de acción -->
+        <div class="button-group">
+            <button mat-raised-button color="primary" type="submit">Generar PDF</button>
+            <button mat-stroked-button color="warn" type="button" (click)="closet()">Cancelar</button>
+        </div>
+    </form>
+</div>
