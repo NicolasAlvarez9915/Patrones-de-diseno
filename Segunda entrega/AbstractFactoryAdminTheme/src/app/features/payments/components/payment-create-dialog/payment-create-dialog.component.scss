@@ -1,0 +1,35 @@
+.form-container {
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.dialog-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.half-width {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 200px;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}

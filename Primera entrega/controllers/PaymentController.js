@@ -3,11 +3,11 @@ const PaymentService = require('../services/PaymentService.js');
 class PaymentController {
     static processPayment(req, res) {
         try {
-            const { paymentType, amount } = req.body;
-            if (!paymentType || !amount) {
+            const { paymentType, amount, addressee, notificationType } = req.body;
+            if (!paymentType || !amount || !addressee || !notificationType) {
                 return res.status(400).json({ error: 'Faltan datos requeridos' });
             }
-            const result = PaymentService.processPayment(paymentType, amount);
+            const result = PaymentService.processPayment(paymentType, amount, addressee, notificationType);
             res.json(result);
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -16,6 +16,11 @@ class PaymentController {
 
     static getPaymentMethods = (req, res) => {
         const methods = PaymentService.getAvailablePaymentMethods();
+        res.json(methods);
+    };
+
+    static getnotificationMethods = (req, res) => {
+        const methods = PaymentService.getAvailableNotificationMethods();
         res.json(methods);
     };
 

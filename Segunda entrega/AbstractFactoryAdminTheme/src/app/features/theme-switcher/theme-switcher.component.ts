@@ -1,42 +1,51 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { Theme } from '../../core/theme/models/theme';
 import { ThemeService } from '../../core/theme/services/theme.service';
 import { ThemeFactory } from '../../core/theme/factories/theme-factory.abstract';
 import { DarkThemeFactory } from '../../core/theme/factories/dark-theme-factory';
 import { LightThemeFactory } from '../../core/theme/factories/light-theme-factory';
 import { PurpleThemeFactory } from '../../core/theme/factories/purple-theme-factory';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { DarkTheme } from '../../core/theme/models/dark-theme';
+import { LightTheme } from '../../core/theme/models/light-theme';
+import { PurpleTheme } from '../../core/theme/models/purple-theme';
 
 @Component({
   selector: 'app-theme-switcher',
-  imports: [CommonModule],
+  imports: [CommonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,],
   standalone: true,
   templateUrl: './theme-switcher.component.html',
   styleUrl: './theme-switcher.component.scss'
 })
 export class ThemeSwitcherComponent {
-  theme: Theme;
-
+  theme: any;
   constructor(private themeService: ThemeService) {
-    this.theme = this.themeService.getTheme();
+    themeService.theme$.subscribe(theme => {
+      this.theme = theme;
+    });
   }
 
-  setTheme(themeType: string): void {
-    let factory: ThemeFactory;
-    switch (themeType) {
+  setTheme(theme: string): void {
+    let themeFactory: ThemeFactory;
+    switch (theme) {
       case 'dark':
-        factory = new DarkThemeFactory();
+        themeFactory = new DarkThemeFactory(); // Debes tener una clase DarkTheme
         break;
       case 'light':
-        factory = new LightThemeFactory();
+        themeFactory = new LightThemeFactory(); // Debes tener una clase LightTheme
         break;
       case 'purple':
-        factory = new PurpleThemeFactory();
+        themeFactory = new PurpleThemeFactory(); // Debes tener una clase PurpleTheme
         break;
       default:
-        factory = new LightThemeFactory();
+        themeFactory = new LightThemeFactory(); // Por defecto
     }
-    this.themeService.setTheme(factory);
-    this.theme = this.themeService.getTheme();
+    this.themeService.setTheme(themeFactory); // Actualiza el tema globalmente
   }
 }

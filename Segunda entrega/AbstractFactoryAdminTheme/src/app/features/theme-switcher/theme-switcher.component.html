@@ -1,6 +1,14 @@
-<div [ngStyle]="{'background-color': theme.backgroundColor, 'color': theme.textColor}" class="theme-container">
-    <h1>Selector de Temas</h1>
-    <button (click)="setTheme('dark')">Dark</button>
-    <button (click)="setTheme('light')">Light</button>
-    <button (click)="setTheme('purple')">Purple</button>
+<div class="actions theme-container" [ngStyle]="{'background-color': theme.backgroundColor, 'color': theme.textColor}"
+    style="display: flex; justify-content: space-between; align-items: center;">
+    <div style="flex: 1;">
+        <h2>Tema</h2>
+    </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Selecciona un Tema</mat-label>
+        <mat-select (selectionChange)="setTheme($event.value)">
+            <mat-option value="dark">Dark</mat-option>
+            <mat-option value="light">Light</mat-option>
+            <mat-option value="purple">Purple</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>

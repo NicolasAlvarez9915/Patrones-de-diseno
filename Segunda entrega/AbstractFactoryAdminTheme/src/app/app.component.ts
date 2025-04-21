@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { ThemeSwitcherComponent } from './features/theme-switcher/theme-switcher.component';
 import { PaymentsComponent } from './features/payments/payments.component';
 import { PaymentService } from './services/payment.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [PaymentsComponent, HttpClientModule],
+  imports: [PaymentsComponent, ThemeSwitcherComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

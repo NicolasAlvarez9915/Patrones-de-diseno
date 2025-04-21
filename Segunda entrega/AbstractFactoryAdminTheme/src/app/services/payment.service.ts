@@ -14,11 +14,15 @@ export class PaymentService {
     return this.http.get<any[]>(`${this.API_URL}/payments/payment-methods`);
   }
 
+  getNotificationMethods(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URL}/payments/notification-methods`);
+  }
+
   getPayments(): Observable<any[]> {
     return this.http.get<any[]>(`${this.API_URL}/payments/payments`);
   }
 
   createPayment(payment: any): Observable<any> {
-    return this.http.post<any>(`${this.API_URL}/payments/payments`, payment);
+    return this.http.post<any>(`${this.API_URL}/payments/process`, payment);
   }
 }

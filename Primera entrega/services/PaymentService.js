@@ -1,32 +1,47 @@
+const NotificationFactory = require('../factories/NotificationFactory.js');
 const PaymentFactory = require('../factories/PaymentFactory.js');
 let payments = [
     {
       id: 0,
       amount: 100.0,
       method: 'Tarjeta de Crédito',
-      date: '2025-04-20'
+      date: '2025-04-20',
+      addressee: 'prueba',
+      notificationType: 'prueba',
+      responseNotification: 'Prueba'
     },
     {
       id: 1,
       amount: 75.5,
       method: 'PayPal',
-      date: '2025-04-18'
+      date: '2025-04-18',
+      addressee: 'prueba',
+      notificationType: 'prueba',
+      responseNotification: 'Prueba'
     }
   ];
 class PaymentService {
-    static processPayment(paymentType, amount) {
+    static processPayment(paymentType, amount, addressee, notificationType) {
         const payment = PaymentFactory.getPayment(paymentType);
         const response = payment.process(amount);
-        const objectResponse = {id: payments.length, amount: response.total, method: response.method, date: new Date()}
+        const notification = NotificationFactory.createNotification(notificationType);
+        const responseNotification = notification.send(addressee, 'Registro del pago exitoso');
+        const objectResponse = {id: payments.length, amount: response.total, method: response.method, date: new Date(), responseNotification, addressee, notificationType}
         payments.push(objectResponse);
         return objectResponse;
     }
     static getAvailablePaymentMethods = () => {
         return [
-          { id: 1, name: 'Tarjeta de Crédito' },
-          { id: 2, name: 'PayPal' },
-          { id: 3, name: 'Transferencia Bancaria' },
-          { id: 4, name: 'Cripto' }
+          { id: "CREDIT_CARD", name: 'Tarjeta de Crédito' },
+          { id: "PAYPAL", name: 'PayPal' },
+          { id: "DEBIT_CARD", name: 'Tarjeta de Debito' }
+        ];
+    };
+
+    static getAvailableNotificationMethods = () => {
+        return [
+          { id: "sms", name: 'Mensaje de texto' },
+          { id: "email", name: 'Correo Electronico' },
         ];
     };
 
