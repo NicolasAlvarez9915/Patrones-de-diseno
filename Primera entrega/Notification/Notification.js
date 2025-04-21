@@ -1,6 +1,6 @@
 class Notification {
     send(recipient, message){
-        throw new Error('Método process() debe ser implementado');
+        throw new Error('Método send() debe ser implementado');
     };
 }
 
