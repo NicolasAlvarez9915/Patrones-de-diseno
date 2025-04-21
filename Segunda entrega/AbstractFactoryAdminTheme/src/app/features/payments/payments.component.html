@@ -1,0 +1,26 @@
+<h2>Métodos de Pago</h2>
+<ul>
+    <li *ngFor="let method of methods">
+        {{ method.name }}
+    </li>
+</ul>
+
+<h2>Pagos Realizados</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Método</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let payment of payments">
+            <td>{{ payment.id }}</td>
+            <td>{{ payment.method }}</td>
+            <td>{{ payment.amount }}</td>
+            <td>{{ payment.date }}</td>
+        </tr>
+    </tbody>
+</table>

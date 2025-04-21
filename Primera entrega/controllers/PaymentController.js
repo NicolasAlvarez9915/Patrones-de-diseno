@@ -13,6 +13,16 @@ class PaymentController {
             res.status(400).json({ error: error.message });
         }
     }
+
+    static getPaymentMethods = (req, res) => {
+        const methods = PaymentService.getAvailablePaymentMethods();
+        res.json(methods);
+    };
+
+    static getAllPayments = (req, res) => {
+        const payments = PaymentService.getAllPayments();
+        res.json(payments);
+    };
 }
 
 module.exports = PaymentController;
